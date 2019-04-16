@@ -26,7 +26,7 @@ class TeamRepository extends Repository {
         $result = parent::getResults($request);
         $teams = [];
         foreach($result as $result){
-            var_dump($result);
+            //var_dump($result);
             $teams[] = $this->converToModel($result);
         }
         return $teams;
