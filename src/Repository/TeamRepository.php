@@ -4,44 +4,34 @@ namespace App\Repository;
 
 use App\Model\Team;
 
-class TeamRepository extends Repository implements IRepository {
-    private static $table = 'team';
+class TeamRepository extends Repository {
+    
+    private static $teamTable = 'team';
 
     //constructor de TeamRepository
     public function __construct(){
-        parent::__construct(TeamRepository::$table);
+        parent::__construct(TeamRepository::$teamTable);
     }
 
-    //find one team
-    public function getTeam(string $request = ''): Team {
-
-        $team = null;
-        $result = parent:: getTeam($request);
-
-        if($result) {
-            $team = new Team();
-            $team->setTeamName($result['teamName'])
-                ->setPlayer1($result['player1'])
-                ->setPlayer2($result['player2']);
-        }
-
+    //convert to model
+    private function converToModel (array $data): Team {
+        $team = new Team();
+        $team->setId((int)$data['team_id'])
+            ->setTeamName((string)$data['team_name'])
+            ->setPlayer1((string)$data['player1'])
+            ->setPlayer2((string)$data['player2']);
         return $team;
     }
 
     //find teams
-    public function getTeams(string $request = ''): Team {
-
+    public function getTeams(string $request = ''): array {
         $teams = [];
         $results = parent:: getTeams($request);
 
-        if($result) {
-            $team = new Team();
-            $team->setTeamName($result['teamName'])
-                ->setPlayer1($result['player1'])
-                ->setPlayer2($result['player2']);
-            $teams[] = $team;
+        foreach ($results as $result){
+            var_dump($result);
+            $teams[]= $this->converToModel($result);
         }
-
         return $teams;
     }
 
