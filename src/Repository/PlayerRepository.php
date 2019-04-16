@@ -29,4 +29,33 @@ class PlayerRepository extends Repository  {
         }
         return $players;
     }
+
+    //insert player
+    public function insert($player)
+    {
+        if (!$player instanceof Player) {
+            throw new \Exception('You can save only player');
+        }
+        $request = "(last_name, first_name) VALUES ('" . $player->getLastName() . "','" . $player->getFirstName() . "')";
+        return parent::insert($request);
+    }
+
+    //update player
+    public function update($player)
+    {
+        if (!$player instanceof Player) {
+            throw new \Exception('You can save only player');
+        }
+        $request = "SET last_name = '" . $player->getLastName() . "', first_name = '" . $player->getFirstName() . "' WHERE player_id = " . $player->getplayerId() . " ";
+        parent::update($request);
+    }
+
+    //delete player
+    public function delete($player){
+        if(!$player instanceof Player){
+            throw new \Exception('You can save only players');
+        }
+        $request = "WHERE player_id= " . $player->getId();
+        parent::delete($request);
+    }
 }
