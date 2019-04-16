@@ -19,7 +19,7 @@ Class Team {
     }
 
 	public function getTeamName() {
-		return $this->name;
+		return $this->teamName;
     }
     
     public function setTeamName($value){
