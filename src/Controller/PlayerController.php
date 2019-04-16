@@ -2,9 +2,11 @@
   
 namespace App\Controller;
 
-class PlayerController{
+use App\Repository\PlayerRepository;
 
-    
+class PlayerController {
 
+    public function index() {
+        echo 'index';
+    }
 }
-
