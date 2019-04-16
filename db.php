@@ -24,6 +24,14 @@ if($db->connect_errno){
 }
 
 
+   if (!$db->query("DROP TABLE IF EXISTS team;")) {
+        echo "2- Erreur : ".$db->errno." - ".$db->error;
+    }
+
+if (!$db->query("DROP TABLE IF EXISTS player;")) {
+    echo "1- Erreur : ".$db->errno." - ".$db->error;
+}
+
 
 $db->query('CREATE TABLE IF NOT EXISTS `player`(
     player_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
@@ -32,6 +40,9 @@ $db->query('CREATE TABLE IF NOT EXISTS `player`(
 
 if ($db->errno){
     throw new Exception($db->error);
+
+ 
+    
 }
 
 $db->query('CREATE TABLE IF NOT EXISTS `team`(
@@ -62,7 +73,21 @@ if ( !$db->query ("INSERT INTO player (last_name, first_name)
                                         ('Fleau D\'Ogre', 'Tormund'),
                                         ('Clegane', 'Sandor'),
                                         ('Mormont', 'Jorah'),
-                                        ('Lord', 'Varys');") )                                       
+                                        ('Lord', 'Varys'),                                      
+                                        ('Greyjoy','Theon');"))                                      
         {
-                echo "1- Erreur : ".$db->errno." - ".$db->error;
+                echo "3- Erreur : ".$db->errno." - ".$db->error;
+        }
+
+        if (!$db->query ("INSERT INTO team (team_name, player1_id, player2_id)
+                                VALUES ('Team Dragon',4,5),
+                                       ('Team Sauvageon',11,12),
+                                       ('Team WeReDead',9,2),
+                                       ('Team SisStark',1,3),
+                                       ('Team MySisWantsUsDead',6,7),
+                                       ('Team WeReSecondaryPeople',10,13),
+                                       ('Team WeReLoveTheQueen',16,14),
+                                       ('Team WeReReallyWeird',8,15);"))
+        {
+                echo "4- Erreur : ".$db->errno." - ".$db->error;
         }
