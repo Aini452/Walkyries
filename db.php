@@ -93,12 +93,12 @@ if ( !$db->query ("INSERT INTO player (last_name, first_name)
         if (!$db->query ("INSERT INTO team (team_name, player1_id, player2_id)
                                 VALUES ('Team Dragon',4,5),
                                        ('Team Sauvageon',11,12),
-                                       ('Team WeReDead',9,2),
-                                       ('Team SisStark',1,3),
-                                       ('Team MySisWantsUsDead',6,7),
-                                       ('Team WeReSecondaryPeople',10,13),
-                                       ('Team WeReLoveTheQueen',16,14),
-                                       ('Team WeReReallyWeird',8,15);"))
+                                       ('Team Dead',9,2),
+                                       ('Team Stark',1,3),
+                                       ('Team Fraticide',6,7),
+                                       ('Team Secondaire',10,13),
+                                       ('Team Khaleesi',16,14),
+                                       ('Team Bizarre',8,15);"))
         {
                 echo "6- Erreur : ".$db->errno." - ".$db->error;
         }
