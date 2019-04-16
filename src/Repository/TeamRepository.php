@@ -15,10 +15,10 @@ class TeamRepository extends Repository {
 
     private function converToModel(array $data): Team {
         $team = new Team();
-        $team->setId((string)$data['team_id'])
-                ->setId((string)$data['team_name'])
-                ->setId((string)$data['player1_id'])
-                ->setId((string)$data['player2_id']);
+        $team->setTeamId((int)$data['team_id'])
+                ->setTeamName((string)$data['team_name'])
+                ->setplayer1Id((int)$data['player1_id'])
+                ->setplayer2Id((int)$data['player2_id']);
         return $team;
     }
 

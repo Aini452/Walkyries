@@ -4,17 +4,17 @@ namespace App\Model;
 
 Class Team {
 
-    private $id;
+    private $teamId;
     private $teamName;
-    private $player1;
-    private $player2;
+    private $player1Id;
+    private $player2Id;
 
-    public function getId(){
-        return $this->id;
+    public function getTeamId(){
+        return $this->teamId;
     }
 
-    public function setId($value){
-        $this->id = $value;
+    public function setTeamId($value){
+        $this->teamId = $value;
         return $this;
     }
 
@@ -27,21 +27,21 @@ Class Team {
         return $this;
     }
 
-    public function getPlayer1() {
-		return $this->player1;
+    public function getPlayer1Id() {
+		return $this->player1Id;
     }
     
-    public function setPlayer1($value){
-        $this->player1 = $value;
+    public function setPlayer1Id($value){
+        $this->player1Id = $value;
         return $this;
     }
 
-    public function getPlayer2() {
-		return $this->player2;
+    public function getPlayer2Id() {
+		return $this->player2Id;
     }
     
-    public function setPlayer2($value){
-        $this->player2 = $value;
+    public function setPlayer2Id($value){
+        $this->player2Id = $value;
         return $this;
     }
     
