@@ -41,4 +41,3 @@ if (!in_array($action, $methodesAvailable)) {
 $controller->$action();
 
 ?>
-<h1> Hello ! I work</h1>

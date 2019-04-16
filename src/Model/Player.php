@@ -3,46 +3,64 @@
 namespace App\Model;
 
 Class Player {
-
+    /** @var int id */
     private $id;
+    /** @var string firstName */
     private $firstName;
+    /** @var string lastName */
     private $lastName;
-    private $equipe;
 
-    public function getId(){
+    /**
+      * Get the value of id
+      *
+      * @return int
+      */ 
+    public function getId(): int {
         return $this->id;
     }
-
-    public function setId($value){
+     /**
+      * Set the value of id
+      *
+      * @return  self
+      */ 
+    public function setId($value): self {
         $this->id = $value;
         return $this;
     }
 
-	public function getFirstName() {
+    /**
+      * Get the value of firstName
+      *
+      * @return string
+      */ 
+	public function getFirstName(): string {
 		return $this->firstName;
     }
-    
-    public function setFirstName($value){
+    /**
+      * Set the value of firstName
+      *
+      * @return  self
+      */ 
+    public function setFirstName($value): self {
         $this->firstName = $value;
         return $this;
     }
 
-    public function getLastName() {
+    /**
+      * Get the value of lastName
+      *
+      * @return string
+      */ 
+    public function getLastName(): string {
 		return $this->lastName;
     }
-    
-    public function setLastName($value){
-        $this->lirstName = $value;
+    /**
+      * Set the value of lastName
+      *
+      * @return  self
+      */ 
+    public function setLastName($value): self {
+        $this->lastName = $value;
         return $this;
     }
-
-    public function getEquipe() {
-		return $this->equipe;
-    }
-    
-    public function setEquipe($value){
-        $this->equipe = $value;
-        return $this;
-    }
-    
 }
