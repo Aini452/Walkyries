@@ -57,10 +57,10 @@ class TeamRepository extends Repository {
 
         if ($result) {
             $team = new Team();
-            $team->setId($result['team_id'])
+            $team->setTeamId($result['team_id'])
                 ->setTeamName($result['team_name'])
-                ->setPlayer1($result['player1_id'])
-                ->setPlayer1($result['player2_id']);
+                ->setPlayer1Id($result['player1_id'])
+                ->setPlayer1Id($result['player2_id']);
         }
         return $team;
     }
@@ -71,7 +71,7 @@ class TeamRepository extends Repository {
         if (!$team instanceof Team) {
             throw new \Exception('You can save only team');
         }
-        $request = "(team_name, player1_id, player2_id) VALUES ('" . $team->getTeamName() . "','" . $team->getPlayer1() . "','" . $team->getPlayer2() . "')";
+        $request = "(team_name, player1_id, player2_id) VALUES ('" . $team->getTeamName() . "','" . $team->getPlayer1Id() . "','" . $team->getPlayer2Id() . "')";
         return parent::insert($request);
     }
 
@@ -82,7 +82,7 @@ class TeamRepository extends Repository {
         if (!$team instanceof Team) {
             throw new \Exception('You can save only team');
         }
-        $request = "SET team_name = '" . $team->getTeamName() . "', player1_id = '" . $team->getPlayer1() . "', player2_id = '" . $team->getPlayer2() . "' WHERE team_id = " . $team->getId() . " ";
+        $request = "SET team_name = '" . $team->getTeamName() . "', player1_id = '" . $team->getPlayer1Id() . "', player2_id = '" . $team->getPlayer2Id() . "' WHERE team_id = " . $team->getTeamId() . " ";
         parent::update($request);
     }
 
@@ -91,7 +91,7 @@ class TeamRepository extends Repository {
         if(!$team instanceof Team){
             throw new \Exception('You can save only teams');
         }
-        $request = "WHERE team_id= " . $team->getId();
+        $request = "WHERE team_id= " . $team->getTeamId();
         parent::delete($request);
     }
 

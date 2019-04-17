@@ -1,22 +1,32 @@
 <!DOCTYPE html>
-    <html>
+
+<html>
         <head>
             <title>Création des Teams</title>
             <script src="public/js/bootstrap.min.js"></script>                  
             <link  href="public/css/bootstrap.min.css" rel="stylesheet">
         </head>
-        <body> 
-       
+
+    <body>        
         <?php require_once'menu.php'?>
-         <?php foreach ($teams as $team) : ?> 
-            <div class="card" style="width: 400px; margin : 20px; text-align : center;">
-                    
-                <h5 class="card-title"> <?php echo $team->getTeamName(); ?> </h5>
-                <p class="card-text"> Joueur 1 : <?php echo $team->getplayer1Id()->getFirstname(); ?> et Joueur 2 :<?php echo$team->getplayer2Id()->getFirstname(); ?>  </p>     
-                <p class="card-text"> </p>     
-                   
-             </div>
-             <?php endforeach; ?> 
-        </body>
+
+            <div class="container-fluid">
+                 <div class="row">
+                    <?php foreach ($teams as $team) : ?>  
+                        <div class="card border-dark mb-3" style="width: 300px; text-align :center; margin : 30px;">
+                              <div class="card-header"><h3><?php echo $team->getTeamName(); ?> </h3>
+                                     <div class="card-body">
+                                         <h6 class="card-title">Nom des joueurs  </h6>
+                                             <p class="card-text"></p> <?php echo $team->getplayer1Id()->getFirstname(); ?>
+                                             <p class="card-text"> <?php echo $team->getplayer2Id()->getFirstname(); ?></p>
+                                     </div>
+                                     <button type="button" class="btn btn-success" style="margin-right : 50px;">Update</button>
+                                     <button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button>
+                              </div>                              
+                        </div>               
+                     <?php endforeach; ?>  
+                </div>
+            </div>
+    </body>
            
-    </html>
+</html>
