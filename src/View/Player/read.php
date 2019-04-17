@@ -3,10 +3,11 @@
 <head>
 <title>Liste des joueurs</title>
 <script src="public/js/bootstrap.min.js"></script>                  
-            <link  href="public/css/bootstrap.min.css" rel="stylesheet">
+<link  href="public/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<img src="public/banner.jpg" alt="police-game-of-thrones" border="0">
+
+        <?php require_once'menu.php'?>
            
             <?php foreach ($players as $player) : ?>     
             <div class="card" style="width: 300px; margin : 20px; text-align : center;">

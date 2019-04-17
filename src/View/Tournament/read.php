@@ -3,7 +3,24 @@
         <head>
             <title>Création du Tournoi</title>
         </head>
-        <body>
+    <body>
+
+        <?php require_once'menu.php'?>
+            <div class="container">
+                <div><strong>Quart de finale</strong></div>
+                    <?php foreach ($tournament as $match) : ?>
+                    <ul class="list-group" style="width : 250px; margin : 50px;">      
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $match->getPlayer1(); ?>
+                            <input type="score" placeholder="score" style="width : 50px;"><?php echo $match->getScore1(); ?>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $match->getPlayer2(); ?>
+                        <input type="score" placeholder="score" style="width : 50px;"><?php echo $match->getScore2(); ?>
+                        </li> 
+                    </ul>
+                <?php endforeach; ?>
+            </div>
+
+
             <table>
                 <thead>
                     <tr>
