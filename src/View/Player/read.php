@@ -8,6 +8,7 @@
 <body>
 
         <?php require_once'menu.php'?>
+           <div class="container">
            
             <?php foreach ($players as $player) : ?>     
             <div class="card" style="width: 300px; margin : 20px; text-align : center;">
@@ -16,6 +17,7 @@
                 <p class="card-text"> </p>                     
              </div>
     <?php endforeach; ?>
+    </div>
    </body>
 </html>
 

@@ -7,7 +7,7 @@
 
         <?php require_once'menu.php'?>
             <div class="container">
-                <div><strong>Quart de finale</strong></div>
+                <div style=" margin : 50px;"><strong>Quart de finale</strong></div>
                     <?php foreach ($tournament as $match) : ?>
                     <ul class="list-group" style="width : 250px; margin : 50px;">      
                         <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $match->getPlayer1(); ?>

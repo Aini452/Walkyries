@@ -6,7 +6,7 @@
 </head>
 
 <body>
-<img src="public/banner.jpg" alt="police-game-of-thrones" border="0" style="margin-bottom:30px; margin-top:30px;">
+<img src="public/banner.jpg" alt="police-game-of-thrones" border="0" style="margin-bottom:30px; margin-top:30px; width : auto;">
 <nav class="navbar navbar-expand-lg bg-dark"  style="margin-bottom:30px;>
 
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
