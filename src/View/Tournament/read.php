@@ -30,14 +30,14 @@
                     console.log("On passe à la demie finale !");
                     console.log($('#1').val());
                     console.log($('#1').attr("name"));
-                    var $team1 = $('#1').attr("name"); 
+                    var team1 = $('#1').attr("name"); 
                     var score1 = $('#1').val();
 
                     $.ajax({
                         url: 'index.php?c=Tournament&a=quart',
                         type: 'POST',
                         data: {
-                            $team1 : team1,
+                            team1 : team1,
                             score1 : score1
                         }
                     });
