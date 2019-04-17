@@ -5,11 +5,11 @@ namespace App\Model;
 class Match {
     /** @var int id */
     private $id;
-    /** @var int player1 */
+ 
     private $player1;
     /** @var int score1 */
     private $score1;
-    /** @var int player2 */
+
     private $player2;
     /** @var int  score2 */
     private $score2;

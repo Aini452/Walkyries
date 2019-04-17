@@ -33,12 +33,22 @@ class TeamRepository extends Repository {
         return $teams;
     }
 
+    // Return a Player 
     public function getPlayerFromId ($id) {
         $player = new PlayerRepository();
         $player = $player->getOnePlayer($id);
         return $player;
     }
 
+    public function getOneTeam(int $id): Team {
+        $teamTab = $this->getResults();
+        foreach ($teamTab as $res) {
+            if ($res->getTeamId() === $id){
+                return $res;
+            }
+        }
+        return false;
+    }
     //find team
     public function getResult(string $request = ''): ?Team
     {

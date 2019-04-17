@@ -6,6 +6,7 @@ use App\Repository\TournamentRepository;
 
 class TournamentController {
 
+
     public function index() {
         echo 'index';
         $tournamentRepository = new TournamentRepository();
@@ -22,6 +23,11 @@ class TournamentController {
         echo 'update';
     }
 
+    public function quart (){
+        echo 'lala';
+        $score1 = $_POST['score1'];
+        echo $_POST['score1'];
+    }
     
 
 }

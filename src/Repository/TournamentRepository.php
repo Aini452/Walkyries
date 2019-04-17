@@ -10,10 +10,10 @@ use App\Repository\PlayerRepository;
 
 class TournamentRepository extends Repository  {
 
-    
+    private static $matchTable = 'match';
 
     function __construct() {
-        
+        parent::__construct(TournamentRepository::$matchTable);
     }
 
     private function getTeamsStart() {
@@ -36,29 +36,37 @@ class TournamentRepository extends Repository  {
             $player2Id = $teams[0]->getTeamId();
             array_shift($teams);
             // A améliorer
-            $match->setPlayer1($player1Id)
-                    -> setPlayer2($player2Id)
-                    ->setIdTournament($id);
+            $match->setPlayer1($this->getTeamFormId($player1Id))
+                    ->setPlayer2($this->getTeamFormId($player2Id))
+                    ->setScore1(0)
+                    ->setScore2(0)
+                    ->setIdTournament($id)
+                    ->setTag('quart');
+            $this->insert($match);
             $quart[] = $match;
         }
         return $quart;
     }
 
-    private function converToModel(array $data): Player {
-        $player = new Player();
-        $player->setId((int)$data['player_id'])
-                ->setFirstName((string)$data['first_name'])
-                ->setLastName((string)$data['last_name']);
-        return $player;
+    public function getTeamFormId($id) {
+        $team = new TeamRepository();
+        $team = $team->getOneTeam($id);
+        return $team;
     }
 
-    public function getResults(string $request = ''): array {
-        $result = parent::getResults($request);
-        $players = [];
-        foreach($result as $res){
-            var_dump($res);
-            $players[] = $this->converToModel($res);
+    public function insert($match)
+    {
+        if (!$match instanceof Match) {
+            throw new \Exception('You can save only match');
         }
-        return $players;
+        $request = "(team_1, team_2, match_tag, score_1, score_2, tournament_id ) VALUES 
+        ('" . $match->getPlayer1()->getTeamId() . "','" 
+        . $match->getPlayer2()->getTeamId() . "','" 
+        . $match->getTag() . "','"
+        . $match->getScore1() . "','"
+        . $match->getScore2() . "','"
+        . $match->getIdTournament()
+        . "')";
+        return parent::insert($request);
     }
 }
