@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Model\Team;
+use App\Repository\PlayerRepository;
 
 class TeamRepository extends Repository {
     
@@ -17,8 +18,8 @@ class TeamRepository extends Repository {
         $team = new Team();
         $team->setTeamId((int)$data['team_id'])
                 ->setTeamName((string)$data['team_name'])
-                ->setplayer1Id((int)$data['player1_id'])
-                ->setplayer2Id((int)$data['player2_id']);
+                ->setplayer1Id($this->getPlayerFromId($data['player1_id']))
+                ->setplayer2Id($this->getPlayerFromId($data['player2_id']));
         return $team;
     }
 
@@ -30,6 +31,12 @@ class TeamRepository extends Repository {
             $teams[] = $this->converToModel($result);
         }
         return $teams;
+    }
+
+    public function getPlayerFromId ($id) {
+        $player = new PlayerRepository();
+        $player = $player->getOnePlayer($id);
+        return $player;
     }
 
     //find team

@@ -24,9 +24,18 @@ class PlayerRepository extends Repository  {
         $result = parent::getResults($request);
         $players = [];
         foreach($result as $res){
-            var_dump($res);
             $players[] = $this->converToModel($res);
         }
         return $players;
+    }
+
+    public function getOnePlayer(int $id): Player {
+        $playersTab = $this->getResults();
+        foreach ($playersTab as $res) {
+            if ($res->getId() === $id){
+                return $res;
+            }
+        }
+        return false;
     }
 }

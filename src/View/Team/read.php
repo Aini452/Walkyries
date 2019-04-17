@@ -11,7 +11,7 @@
             <div class="card" style="width: 400px; margin : 20px; text-align : center;">
                     
                 <h5 class="card-title"> <?php echo $team->getTeamName(); ?> </h5>
-                <p class="card-text"> Joueur 1 : <?php echo $team->getplayer1Id(); ?> et Joueur 2 :<?php echo $team->getplayer2Id(); ?>  </p>     
+                <p class="card-text"> Joueur 1 : <?php echo $team->getplayer1Id()->getFirstname(); ?> et Joueur 2 :<?php echo$team->getplayer2Id()->getFirstname(); ?>  </p>     
                 <p class="card-text"> </p>     
                    
              </div>
