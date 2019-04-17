@@ -29,47 +29,13 @@ class PlayerRepository extends Repository  {
         return $players;
     }
 
-    public function getResult(string $request = ''): ?Player
-    {
-        $player = null;
-        $result = parent::getResult($request);
-
-        if ($result) {
-            $player = new Player();
-            $player->setId($result['player_id'])
-                ->setFirstName($result['first_name'])
-                ->setLastName($result['last_name']);
+    public function getOnePlayer(int $id): Player {
+        $playersTab = $this->getResults();
+        foreach ($playersTab as $res) {
+            if ($res->getId() === $id){
+                return $res;
+            }
         }
-
-        return $player;
+        return false;
     }
-
-    //insert player
-    public function insert($player)
-    {
-        if (!$player instanceof Player) {
-            throw new \Exception('You can save only player');
-        }
-        $request = "(last_name, first_name) VALUES ('" . $player->getLastName() . "','" . $player->getFirstName() . "')";
-        return parent::insert($request);
-    }
-
-    //update player
-    public function update($player)
-    {
-        if (!$player instanceof Player) {
-            throw new \Exception('You can save only player');
-        }
-        $request = "SET last_name = '" . $player->getLastName() . "', first_name = '" . $player->getFirstName() . "' WHERE player_id = " . $player->getId() . " ";
-        parent::update($request);
-    }
-
-    //delete player
-    public function delete($player){
-        if(!$player instanceof Player){
-            throw new \Exception('You can save only players');
-        }
-        $request = "WHERE player_id= " . $player->getId();
-        parent::delete($request);
- }
 }
