@@ -16,8 +16,8 @@
                         <div class="card-body">
                               <p class="card-text"> <?php echo $player->getLastName(); ?> <?php echo $player->getFirstName(); ?></p> 
                         </div>
-                              <button type="button" class="btn btn-success" style="margin-right : 50px;">Update</button>                            
-                              <button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button>
+                           <a href="index.php?c=Player&a=update&id=<?php echo $player->getId(); ?>"><button type="button" class="btn btn-success" style="margin-right : 50px;">Update</button></a>                         
+                           <a href="index.php?c=Player&a=delete&id=<?php echo $player->getId(); ?>"><button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button></a>
                      </div>
                   </div>               
                <?php endforeach; ?>  
