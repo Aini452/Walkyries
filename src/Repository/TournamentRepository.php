@@ -19,30 +19,37 @@ class TournamentRepository extends Repository  {
     private function getTeamsStart() {
         $teamRepository = new TeamRepository();
         $teams =  $teamRepository->getResults();
+      
         $teamsTournament = [];
         for ($i=0 ; $i<8 ; $i++){
             $teamsTournament[] = $teams[$i];
         }
+        shuffle($teamsTournament);
         return $teamsTournament;
     }
 
     public function startTournament(int $id = 1) {
         $teams = self::getTeamsStart();
-        for ($i = 0 ; $i<4 ; $i++){
-            $match = new Match();
-            $player1Id = $teams[0]->getTeamId();
-            array_shift($teams);
-            $player2Id = $teams[0]->getTeamId();
-            array_shift($teams);
-            // A améliorer
-            $match->setPlayer1($this->getTeamFormId($player1Id))
-                    ->setPlayer2($this->getTeamFormId($player2Id))
-                    ->setScore1(0)
-                    ->setScore2(0)
-                    ->setIdTournament($id)
-                    ->setTag('quart');
-            $this->insert($match);
+        if (count($teams)>3){ 
+            echo 'Vous avez deja assez d\'équipes pour ce tournoi';
+        } else {
+            for ($i = 0 ; $i<4 ; $i++){
+                $match = new Match();
+                $player1Id = $teams[0]->getTeamId();
+                array_shift($teams);
+                $player2Id = $teams[0]->getTeamId();
+                array_shift($teams);
+                // A améliorer
+                $match->setPlayer1($this->getTeamFormId($player1Id))
+                        ->setPlayer2($this->getTeamFormId($player2Id))
+                        ->setScore1(0)
+                        ->setScore2(0)
+                        ->setIdTournament($id)
+                        ->setTag('quart');
+                $this->insert($match);
+            }
         }
+       
     }
 
     public function getTeamFormId($id) {
@@ -70,7 +77,6 @@ class TournamentRepository extends Repository  {
     public function getResults(string $request = ''): array {
         $result = parent::getResults($request);
         $matchs = [];
-        var_dump($request);
         foreach($result as $result){
             //var_dump($result);
             $matchs[] = $this->converToModel($result);
@@ -88,5 +94,16 @@ class TournamentRepository extends Repository  {
                 ->setIdTournament((int)$data['tournament_id'])
                 ->setTag((int)$data['match_tag']);
         return $match;
+    }
+
+    public function updateScores($id, $score1, $score2){
+        //$match = this->getMatch($id);
+        $request = 'SET score_1=' . $score1 . ', score_2=' . $score2 . ' WHERE match_id=' . $id . ';';
+        var_dump($request);
+        parent::update($request);
+    }
+
+    public function compareScore($id){
+
     }
 }

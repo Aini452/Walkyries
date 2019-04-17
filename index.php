@@ -18,7 +18,7 @@ if(isset($_GET['c']) && !empty($_GET['c'])) {
 } else {
     $controllerName .= 'TournamentController';
 }
-var_dump($controllerName);
+
 if (!class_exists($controllerName, true)){
     echo '404 - Probleme C';
     exit;
