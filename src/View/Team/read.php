@@ -2,27 +2,20 @@
     <html>
         <head>
             <title>Création des Teams</title>
+            <script src="public/js/bootstrap.min.js"></script>                  
+            <link  href="public/css/bootstrap.min.css" rel="stylesheet">
         </head>
-        <body>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>TeamName</th>
-                        <th>Player1_id</th>
-                        <th>Player2_id</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($teams as $team) : ?>
-                    <tr>
-                        <td> <?php echo $team->getTeamId(); ?></td>
-                        <td> <?php echo $team->getTeamName(); ?></td>
-                        <td> <?php echo $team->getplayer1Id(); ?></td>
-                        <td> <?php echo $team->getplayer2Id(); ?></td>
-                    </tr>
-                <?php endforeach; ?>
-                </tbody>
-            </table>
+        <body> 
+        <img src="public/banner.jpg" alt="police-game-of-thrones" border="0">
+         <?php foreach ($teams as $team) : ?> 
+            <div class="card" style="width: 400px; margin : 20px; text-align : center;">
+                    
+                <h5 class="card-title"> <?php echo $team->getTeamName(); ?> </h5>
+                <p class="card-text"> Joueur 1 : <?php echo $team->getplayer1Id(); ?> et Joueur 2 :<?php echo $team->getplayer2Id(); ?>  </p>     
+                <p class="card-text"> </p>     
+                   
+             </div>
+             <?php endforeach; ?> 
         </body>
+           
     </html>

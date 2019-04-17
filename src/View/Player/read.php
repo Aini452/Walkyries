@@ -2,25 +2,19 @@
 <html>
 <head>
 <title>Liste des joueurs</title>
+<script src="public/js/bootstrap.min.js"></script>                  
+            <link  href="public/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<table>
-<thead>
-<tr>
-    <th>#</th>
-    <th>FirstName</th>
-    <th>LastName</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php foreach ($players as $player) : ?>
-    <tr>
-    <td> <?php echo $player->getId(); ?></td>
-    <td> <?php echo $player->getFirstName(); ?></td>
-    <td> <?php echo $player->getLastName(); ?></td>
-</tr>
-<?php endforeach; ?>
-   </tbody>
-   </table>
+<img src="public/banner.jpg" alt="police-game-of-thrones" border="0">
+           
+            <?php foreach ($players as $player) : ?>     
+            <div class="card" style="width: 300px; margin : 20px; text-align : center;">
+                <h5 class="card-title"> Numéro du joueur : <?php echo $player->getId(); ?> </h5>
+                <p class="card-text"> Nom et prénom du joueur : <?php echo $player->getLastName(); ?>  <?php echo $player->getFirstName(); ?>  </p>     
+                <p class="card-text"> </p>                     
+             </div>
+    <?php endforeach; ?>
    </body>
 </html>
+

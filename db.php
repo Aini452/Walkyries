@@ -9,7 +9,6 @@ $env = getenv('ENV');//chargement des variables d environnement seulement en loc
 if(!$env || $env === 'dev') {
     $dotenv = new DotEnv();
     $dotenv->load(__DIR__ . '/.env');
-
 }
 
 $db = new mysqli(getenv('DB_HOST'), 
@@ -24,14 +23,6 @@ if($db->connect_errno){
 }
 
 
-   if (!$db->query("DROP TABLE IF EXISTS team;")) {
-        echo "2- Erreur : ".$db->errno." - ".$db->error;
-    }
-
-if (!$db->query("DROP TABLE IF EXISTS player;")) {
-    echo "1- Erreur : ".$db->errno." - ".$db->error;
-}
-
 
 $db->query('CREATE TABLE IF NOT EXISTS `player`(
     player_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
@@ -39,10 +30,7 @@ $db->query('CREATE TABLE IF NOT EXISTS `player`(
     first_name VARCHAR(255));');
 
 if ($db->errno){
-    throw new Exception($db->error);
-
- 
-    
+    throw new Exception($db->error);    
 }
 
 $db->query('CREATE TABLE IF NOT EXISTS `team`(
@@ -52,11 +40,34 @@ $db->query('CREATE TABLE IF NOT EXISTS `team`(
     player2_id INT,
     FOREIGN KEY (player1_id) REFERENCES player(player_id),
     FOREIGN KEY (player2_id) REFERENCES player(player_id));');
-
     
 if ($db->errno){
     throw new Exception($db->error);
 }
+
+$db->query('CREATE TABLE IF NOT EXISTS `tournament`(
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT);');
+    
+if ($db->errno){
+    throw new Exception($db->error);
+}
+
+$db->query('CREATE TABLE IF NOT EXISTS `match`(
+    match_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
+    team_1 INT,
+    team_2 INT,
+    match_tag VARCHAR(255),
+    score_1 INT,
+    score_2 INT,
+    tournament_id INT,
+    FOREIGN KEY (team_1) REFERENCES team(team_id),
+    FOREIGN KEY (team_2) REFERENCES team(team_id),
+    FOREIGN KEY (tournament_id) REFERENCES tournament(id));');
+    
+if ($db->errno){
+    throw new Exception($db->error);
+}
+
 
 if ( !$db->query ("INSERT INTO player (last_name, first_name)  
                                 VALUES  ('Stark', 'Sansa'),
@@ -76,18 +87,18 @@ if ( !$db->query ("INSERT INTO player (last_name, first_name)
                                         ('Lord', 'Varys'),                                      
                                         ('Greyjoy','Theon');"))                                      
         {
-                echo "3- Erreur : ".$db->errno." - ".$db->error;
+                echo "5- Erreur : ".$db->errno." - ".$db->error;
         }
 
         if (!$db->query ("INSERT INTO team (team_name, player1_id, player2_id)
                                 VALUES ('Team Dragon',4,5),
                                        ('Team Sauvageon',11,12),
-                                       ('Team WeReDead',9,2),
-                                       ('Team SisStark',1,3),
-                                       ('Team MySisWantsUsDead',6,7),
-                                       ('Team WeReSecondaryPeople',10,13),
-                                       ('Team WeReLoveTheQueen',16,14),
-                                       ('Team WeReReallyWeird',8,15);"))
+                                       ('Team Dead',9,2),
+                                       ('Team Stark',1,3),
+                                       ('Team Fraticide',6,7),
+                                       ('Team Secondaire',10,13),
+                                       ('Team Khaleesi',16,14),
+                                       ('Team Bizarre',8,15);"))
         {
-                echo "4- Erreur : ".$db->errno." - ".$db->error;
+                echo "6- Erreur : ".$db->errno." - ".$db->error;
         }
