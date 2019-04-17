@@ -24,7 +24,6 @@ class PlayerRepository extends Repository  {
         $result = parent::getResults($request);
         $players = [];
         foreach($result as $res){
-            //var_dump($res);
             $players[] = $this->converToModel($res);
         }
         return $players;
@@ -72,5 +71,5 @@ class PlayerRepository extends Repository  {
         }
         $request = "WHERE player_id= " . $player->getId();
         parent::delete($request);
-    }
+ }
 }
