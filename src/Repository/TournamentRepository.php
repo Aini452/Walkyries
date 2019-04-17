@@ -6,6 +6,7 @@ use App\Model\Tournament;
 use App\Model\Match;
 
 use App\Repository\TeamRepository;
+use App\Repository\PlayerRepository;
 
 class TournamentRepository extends Repository  {
 
@@ -27,7 +28,6 @@ class TournamentRepository extends Repository  {
 
     public function startTournament(int $id = 1) {
         $teams = self::getTeamsStart();
-        var_dump($teams);
         $quart = [];
         for ($i = 0 ; $i<4 ; $i++){
             $match = new Match();
