@@ -7,13 +7,15 @@
         </head>
         <body> 
         <img src="public/banner.jpg" alt="police-game-of-thrones" border="0">
-            <div class="card" style="width: 400px; margin : 50px; text-align : center;">
-                <?php foreach ($teams as $team) : ?>      
+         <?php foreach ($teams as $team) : ?> 
+            <div class="card" style="width: 400px; margin : 20px; text-align : center;">
+                    
                 <h5 class="card-title"> <?php echo $team->getTeamName(); ?> </h5>
                 <p class="card-text"> Joueur 1 : <?php echo $team->getplayer1Id(); ?> et Joueur 2 :<?php echo $team->getplayer2Id(); ?>  </p>     
                 <p class="card-text"> </p>     
-                <?php endforeach; ?>    
+                   
              </div>
+             <?php endforeach; ?> 
         </body>
            
     </html>
