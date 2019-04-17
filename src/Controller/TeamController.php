@@ -2,8 +2,9 @@
 
 namespace App\Controller;
 
-use App\Repository\TeamRepository;
 
+use App\Repository\TeamRepository;
+use App\Repository\PlayerRepository;
 class TeamController {
 
     private $teamRepository;
@@ -20,76 +21,108 @@ class TeamController {
 
     public function create(){
         echo 'create';
-
+        $teamRepository = new TeamRepository();
+        $playerRepository = new PlayerRepository();
+        $players = $playerRepository->getResults();
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['teamName']) && !empty($_POST['teamName']) || isset($_POST['player1']) && !empty($_POST['player1']) || isset($_POST['player2']) && !empty($_POST['player2'])) {
+            if (isset($_POST['teamName']) && !empty($_POST['teamName']) && 
+                isset($_POST['player1']) && !empty($_POST['player1']) && 
+                isset($_POST['player2']) && !empty($_POST['player2'])) {
                 $team = new Team();
+
                 $team->setTeamName($_POST['teamName'])
                     ->setplayer1Id($_POST['player1'])
                     ->setplayer2Id($_POST['player2']);
+                $teamRepository->insert($team);
 
-                $this->teamRepository->insert($team);
-
-                /*header('Location: /team');
-                exit;*/
-
+                header('Location: /walkyries/walkyries/index.php?c=Team');
+                exit;
             } else {
                 $errors[] = 'Missing Fiels';
+
             }
+
         }
 
         require_once 'src/View/Team/create.php';
+
         return;
+
     }
     
     public function update(){
+
         echo 'update';
 
-        $id = $_GET['id'];
-        //$id = 1;
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['teamName']) && !empty($_POST['player1']) && !empty($_POST['player2'])) {
-                $team = new Team();
-                $team->setTeamName($_POST['teamName'])
-                    ->setplayer1Id($_POST['player1'])
-                    ->setplayer2Id($_POST['player2']);
-                $this->teamRepository->insert($team);
+        $teamRepository = new TeamRepository();
 
-                /*header('Location: /team');
-                exit;*/
+        $playerRepository = new PlayerRepository();
+
+        $players = $playerRepository->getResults();
+
+        $id = $_GET['id'];
+
+        $errors = [];
+
+        $team = $teamRepository->getResult('WHERE team_id=' . $id);
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+            if (isset($_POST['player1']) && !empty($_POST['player1']) && 
+
+                isset($_POST['player2']) && !empty($_POST['player2'])) {
+
+                $team->setplayer1Id(htmlspecialchars($_POST['player1']))
+
+                    ->setplayer2Id(htmlspecialchars($_POST['player2']));
+
+                $teamRepository->update($team);
+
+                header('Location: /walkyries/walkyries/index.php?c=Team');
+
+                exit;
+
             } else {
+
                 $errors[] = 'Missing fields';
+
             }
+
         }
 
         require_once 'src/View/Team/update.php';
-        return;
+
     }
+
+    //chemin de redirection à modifier selon le chemin de l'URL
+
     
-    public function delete(){
-        echo 'delete';
 
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['teamName']) && !empty($_POST['player1']) && !empty($_POST['player2'])) {
-                $team = new Team();
-                $team->setTeamName($_POST['teamName'])
-                    ->setplayer1Id($_POST['player1'])
-                    ->setplayer2Id($_POST['player2']);
+    public function delete() {
 
-                $this->teamRepository->insert($team);
+        $teamRepository = new TeamRepository();
 
-                /*header('Location: /team');
-                exit;*/
-            } else {
-                $errors[] = 'Missing fields';
-            }
+        
+
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+
+            header('Location: /walkyries/walkyries/index.php?c=Team');
+
+            exit;
+
         }
 
-        require_once 'src/View/Team/delete.php';
+        $team = $teamRepository->getResult('WHERE team_id =' . $_GET['id']);
+
+        var_dump($team);
+
+        $teamRepository->delete($team);
+
+        header('Location: /walkyries/walkyries/index.php?c=Team');
+
         return;
+
     }
     
 }
