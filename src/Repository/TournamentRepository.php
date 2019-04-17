@@ -9,12 +9,10 @@ use App\Repository\TeamRepository;
 
 class TournamentRepository extends Repository  {
 
-    private static $tournamentTable = 'tournament';
-    private static $matchTable = 'match';
+    
 
     function __construct() {
-        parent::__construct(self::$tournamentTable);
-        parent::__construct(self::$matchTable);
+        
     }
 
     private function getTeamsStart() {
