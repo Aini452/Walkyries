@@ -46,7 +46,8 @@ if ($db->errno){
 }
 
 $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
-    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT);');
+    id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    tournament_name VARCHAR(255));');
     
 if ($db->errno){
     throw new Exception($db->error);
@@ -101,4 +102,11 @@ if ( !$db->query ("INSERT INTO player (last_name, first_name)
                                        ('Team Bizarre',8,15);"))
         {
                 echo "6- Erreur : ".$db->errno." - ".$db->error;
+        }
+
+        if ( !$db->query ("INSERT INTO tournament (tournament_name)  
+                                VALUES  ('Tournoi des sept couronnes');"))
+
+        {
+            echo "6- Erreur : ".$db->errno." - ".$db->error;
         }
