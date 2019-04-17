@@ -8,10 +8,8 @@
    
    <body>
       <?php require_once'menu.php'?>
-         <div class="container">
-        
-            <div class="row">
-          
+         <div class="container">        
+            <div class="row">          
              <div class="col-4"></div>
                <form method=POST class="col-4" style ="text-align : center; background-color : rgb(169,169,169); padding : 30px; border-radius : 20px; margin-top : 50px;"> 
                 <h3 style="margin-top :10px; margin-bottom : 30px; color : white;"> Ajoute ton petanqueur</h3>

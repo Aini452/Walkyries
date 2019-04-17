@@ -20,8 +20,8 @@
                                              <p class="card-text"></p> <?php echo $team->getplayer1Id()->getFirstname(); ?>
                                              <p class="card-text"> <?php echo $team->getplayer2Id()->getFirstname(); ?></p>
                                      </div>
-                                     <button type="button" class="btn btn-success" style="margin-right : 50px;">Update</button>
-                                     <button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button>
+                                     <a href="index.php?c=Team&a=update&id=<?php echo $team->getTeamId(); ?>"><button type="button" class="btn btn-success" style="margin-right : 50px;">Update</button></a>
+                                     <a href="index.php?c=Team&a=delete&id=<?php echo $team->getTeamId(); ?>"><button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button></a>
                               </div>                              
                         </div>               
                      <?php endforeach; ?>  
