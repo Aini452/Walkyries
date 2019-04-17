@@ -30,7 +30,7 @@ class PlayerController {
                 var_dump($player);
                 $playerRepository->insert($player);
 
-                header('Location: /walkyries/walkyries/index.php?c=Player');
+                header('Location: /walkyries/index.php?c=Player');
                 exit;
 
             } else {
@@ -47,19 +47,19 @@ class PlayerController {
         $id= $_GET['id'];
         $errors = [];
 
-        $player = $playerRepository->getResult('WHERE player_id =' . $_GET['id']);
+        $player = $playerRepository->getResult('WHERE player_id =' . $id);
         var_dump($player);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['firstName']) && !empty($_POST['firstName']) && 
                 isset($_POST['lastName']) && !empty($_POST['lastName'])) {
 
-                $player->setFirstName(htmlspecialchars($_POST['firstName']))
-                    ->setLastName(htmlspecialchars($_POST['lastName']));
+                $player->setLastName(htmlspecialchars($_POST['lastName']))
+                    ->setFirstName(htmlspecialchars($_POST['firstName']));
 
                 $playerRepository->update($player);
 
-                header('Location: /walkyries/walkyries/index.php?c=Player');
+                header('Location: /walkyries/index.php?c=Player');
                 exit;
             } else {
                 $errors[] = 'Missing fields';
@@ -81,7 +81,7 @@ class PlayerController {
         var_dump($player);
         $playerRepository->delete($player);
 
-        header('Location: /walkyries/walkyries/index.php?c=Player');
+        header('Location: /walkyries/index.php?c=Player');
         return;
     } 
 

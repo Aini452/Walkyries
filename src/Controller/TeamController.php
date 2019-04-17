@@ -5,6 +5,8 @@ namespace App\Controller;
 
 use App\Repository\TeamRepository;
 use App\Repository\PlayerRepository;
+use App\Model\Team;
+
 class TeamController {
 
     private $teamRepository;
@@ -20,7 +22,7 @@ class TeamController {
     }
 
     public function create(){
-        echo 'create';
+        //echo 'create';
         $teamRepository = new TeamRepository();
         $playerRepository = new PlayerRepository();
         $players = $playerRepository->getResults();
@@ -36,7 +38,7 @@ class TeamController {
                     ->setplayer2Id($_POST['player2']);
                 $teamRepository->insert($team);
 
-                header('Location: /walkyries/walkyries/index.php?c=Team');
+                header('Location: /walkyries/index.php?c=Team');
                 exit;
             } else {
                 $errors[] = 'Missing Fiels';
@@ -79,7 +81,7 @@ class TeamController {
 
                 $teamRepository->update($team);
 
-                header('Location: /walkyries/walkyries/index.php?c=Team');
+                header('Location: /walkyries/index.php?c=Team');
 
                 exit;
 
@@ -107,7 +109,7 @@ class TeamController {
 
         if (!isset($_GET['id']) || empty($_GET['id'])) {
 
-            header('Location: /walkyries/walkyries/index.php?c=Team');
+            header('Location: /walkyries/index.php?c=Team');
 
             exit;
 
@@ -119,7 +121,7 @@ class TeamController {
 
         $teamRepository->delete($team);
 
-        header('Location: /walkyries/walkyries/index.php?c=Team');
+        header('Location: /walkyries/index.php?c=Team');
 
         return;
 
