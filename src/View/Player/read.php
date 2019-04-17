@@ -8,16 +8,25 @@
 <body>
 
         <?php require_once'menu.php'?>
-           <div class="container">
-           
-            <?php foreach ($players as $player) : ?>     
-            <div class="card" style="width: 300px; margin : 20px; text-align : center;">
-                <h5 class="card-title"> Numéro du joueur : <?php echo $player->getId(); ?> </h5>
-                <p class="card-text"> Nom et prénom du joueur : <?php echo $player->getLastName(); ?>  <?php echo $player->getFirstName(); ?>  </p>     
-                <p class="card-text"> </p>                     
-             </div>
-    <?php endforeach; ?>
-    </div>
+    <div class="container-fluid">
+                 <div class="row">
+                 <?php foreach ($players as $player) : ?>   
+                        <div class="card text-white bg-dark mb-3" style="width: 300px; text-align :center; margin : 30px;">
+                              <div class="card-header"><h3>Joueur N° <?php echo $player->getId(); ?> </h3>
+                                     <div class="card-body">
+              
+                <p class="card-text"> <?php echo $player->getLastName(); ?> <?php echo $player->getFirstName(); ?></p> 
+             
+                                     </div>
+                                     <button type="button" class="btn btn-light" style="margin-right : 50px;">Update</button>
+                                     <button type="button" class="btn btn-danger" style="margin-left : 50px;">Delete</button>
+                              </div>
+                        </div>
+               
+             <?php endforeach; ?>  
+                </div>
+            </div>
+
    </body>
 </html>
 
