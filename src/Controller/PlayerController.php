@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Repository\PlayerRepository;
+use  App\Model\Player;
 
 class PlayerController {
 
@@ -17,73 +18,68 @@ class PlayerController {
 
     public function create() {
         echo 'create';
-
+        $playerRepository = new PlayerRepository();
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['lastName']) && !empty($_POST['lastName']) || isset($_POST['firstName']) && !empty($_POST['firstName'])) {
+            if (isset($_POST['lastName']) && !empty($_POST['lastName']) && isset($_POST['firstName']) && !empty($_POST['firstName'])) {
                 $player = new Player();
                 $player->setLastName($_POST['lastName'])
                     ->setFirstName($_POST['firstName']);
+                var_dump($player);
+                $playerRepository->insert($player);
 
-                $this->playerRepository->insert($player);
-
-                /*header('Location: /player');
-                exit;*/
+                header('Location: /walkyries/walkyries/index.php?c=Player');
+                exit;
 
             } else {
                 $errors[] = 'Missing Fiels';
             }
         }
-
         require_once 'src/View/Player/create.php';
-        return;
     }
 
     public function update(){
         echo 'update';
 
+        $playerRepository = new PlayerRepository();
         $id= $_GET['id'];
-        //$id=1;
         $errors = [];
+
+        $player = $playerRepository->getResult('WHERE player_id =' . $_GET['id']);
+        var_dump($player);
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['lastName']) && !empty($_POST['firstName'])) {
-                $player = new Player();
-                $player->setLastName($_POST['lastName'])
-                    ->setFirstName($_POST['firstName']);
+            if (isset($_POST['firstName']) && !empty($_POST['firstName']) && 
+                isset($_POST['lastName']) && !empty($_POST['lastName'])) {
 
-                $this->playerRepository->update($player);
+                $player->setFirstName(htmlspecialchars($_POST['firstName']))
+                    ->setLastName(htmlspecialchars($_POST['lastName']));
 
-                /*header('Location: /player');
-                exit;*/
+                $playerRepository->update($player);
+
+                header('Location: /walkyries/walkyries/index.php?c=Player');
+                exit;
             } else {
                 $errors[] = 'Missing fields';
             }
         }
 
         require_once 'src/View/Player/update.php';
-        return;
     }
 
     public function delete() {
-        echo 'delete';
 
-        $errors = [];
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['lastName']) && !empty($_POST['firstName'])) {
-                $player = new player();
-                $player->setFirstName($_POST['lastName'])
-                    ->setLastName($_POST['firstName']);
-
-                $this->playerRepository->insert($player);
-
-                /*header('Location: /player');
-                exit;*/
-            } else {
-                $errors[] = 'Missing fields';
-            }
+        $playerRepository = new PlayerRepository();
+        
+        if (!isset($_GET['id']) || empty($_GET['id'])) {
+            header('Location: /player');
+            exit;
         }
+        $player = $playerRepository->getResult('WHERE player_id =' . $_GET['id']);
+        var_dump($player);
+        $playerRepository->delete($player);
 
-        require_once 'src/View/Player/delete.php';
+        header('Location: /walkyries/walkyries/index.php?c=Player');
         return;
     } 
 
