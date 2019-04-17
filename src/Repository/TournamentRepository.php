@@ -28,7 +28,6 @@ class TournamentRepository extends Repository  {
 
     public function startTournament(int $id = 1) {
         $teams = self::getTeamsStart();
-        $quart = [];
         for ($i = 0 ; $i<4 ; $i++){
             $match = new Match();
             $player1Id = $teams[0]->getTeamId();
@@ -43,9 +42,7 @@ class TournamentRepository extends Repository  {
                     ->setIdTournament($id)
                     ->setTag('quart');
             $this->insert($match);
-            $quart[] = $match;
         }
-        return $quart;
     }
 
     public function getTeamFormId($id) {
@@ -68,5 +65,28 @@ class TournamentRepository extends Repository  {
         . $match->getIdTournament()
         . "')";
         return parent::insert($request);
+    }
+
+    public function getResults(string $request = ''): array {
+        $result = parent::getResults($request);
+        $matchs = [];
+        var_dump($request);
+        foreach($result as $result){
+            //var_dump($result);
+            $matchs[] = $this->converToModel($result);
+        }
+        return $matchs;
+    }
+
+    private function converToModel(array $data): Match {
+        $match = new Match();
+        $match->setId((int)$data['match_id'])
+                ->setPlayer1($this->getTeamFormId($data['team_1']))
+                ->setScore1((int)$data['score_1'])
+                ->setPlayer2($this->getTeamFormId($data['team_2']))
+                ->setScore2((int)$data['score_2'])
+                ->setIdTournament((int)$data['tournament_id'])
+                ->setTag((int)$data['match_tag']);
+        return $match;
     }
 }

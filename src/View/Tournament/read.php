@@ -11,14 +11,15 @@
                 <div><strong>Quart de finale</strong></div>
                 <?php $i=1; ?>
                     <?php foreach ($tournament as $match) : ?>
+                    <p><?php echo $match->getId(); ?></p>
                     <ul class="list-group" style="width : 250px; margin : 50px;">      
                         <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $match->getPlayer1()->getTeamName(); ?>
-                            <input id="<?php echo $i++; ?>" type="score" placeholder="score" style="width : 50px;" name="<?php echo $match->getPlayer2()->getTeamId()?>">
-                            <?php echo $match->getScore1(); ?>
+                            <input id="<?php echo $i++; ?>" type="score" placeholder="score" style="width : 50px;" name="<?php echo $match->getPlayer2()->getTeamId()?>"
+                            value="<?php echo $match->getScore1(); ?>">    
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center"><?php echo $match->getPlayer2()->getTeamName(); ?>
-                        <input id="<?php echo $i++; ?>"  type="score" placeholder="score" style="width : 50px;" name="<?php echo $match->getPlayer2()->getTeamId()?>">
-                        <?php echo $match->getScore2(); ?>
+                        <input id="<?php echo $i++; ?>"  type="score" placeholder="score" style="width : 50px;" name="<?php echo $match->getPlayer2()->getTeamId()?>"
+                        value="<?php echo $match->getScore2(); ?>">
                         </li> 
                     </ul>
                 <?php endforeach; ?>

@@ -10,8 +10,8 @@ class TournamentController {
     public function index() {
         echo 'index';
         $tournamentRepository = new TournamentRepository();
-        $tournament = $tournamentRepository->startTournament();
-
+        //$tournamentRepository->startTournament();
+        $tournament = $tournamentRepository->getResults();
         include_once 'src/View/Tournament/read.php';
     }
 
