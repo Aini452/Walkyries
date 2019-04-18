@@ -9,17 +9,16 @@ use  App\Model\Player;
 
 class PlayerController {
 
+    //view of all players
     public function index() {
-        echo 'index';
-
         $playerRepository = new PlayerRepository();
         $players = $playerRepository->getResults();
         
         include_once 'src/View/Player/read.php';
     }
 
+    // Create a new player
     public function create() {
-        echo 'create';
         $playerRepository = new PlayerRepository();
         $errors = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,10 +26,9 @@ class PlayerController {
                 $player = new Player();
                 $player->setLastName($_POST['lastName'])
                     ->setFirstName($_POST['firstName']);
-                var_dump($player);
                 $playerRepository->insert($player);
 
-                header('Location: /walkyries/index.php?c=Player');
+                header('Location: /index.php?c=Player');
                 exit;
 
             } else {
@@ -40,15 +38,14 @@ class PlayerController {
         require_once 'src/View/Player/create.php';
     }
 
+    // Update a player
     public function update(){
-        echo 'update';
 
         $playerRepository = new PlayerRepository();
         $id= $_GET['id'];
         $errors = [];
 
         $player = $playerRepository->getResult('WHERE player_id =' . $id);
-        var_dump($player);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['firstName']) && !empty($_POST['firstName']) && 
@@ -59,7 +56,7 @@ class PlayerController {
 
                 $playerRepository->update($player);
 
-                header('Location: /walkyries/index.php?c=Player');
+                header('Location: /index.php?c=Player');
                 exit;
             } else {
                 $errors[] = 'Missing fields';
@@ -69,6 +66,7 @@ class PlayerController {
         require_once 'src/View/Player/update.php';
     }
 
+    //Delete a player
     public function delete() {
 
         $playerRepository = new PlayerRepository();
@@ -78,10 +76,9 @@ class PlayerController {
             exit;
         }
         $player = $playerRepository->getResult('WHERE player_id =' . $_GET['id']);
-        var_dump($player);
         $playerRepository->delete($player);
 
-        header('Location: /walkyries/index.php?c=Player');
+        header('Location: /index.php?c=Player');
         return;
     } 
 

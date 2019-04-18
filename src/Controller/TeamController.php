@@ -13,8 +13,6 @@ class TeamController {
 
     
     public function index(){
-        echo 'index';
-
         $teamRepository = new TeamRepository();
         $teams = $teamRepository->getResults();
 
@@ -22,7 +20,6 @@ class TeamController {
     }
 
     public function create(){
-        //echo 'create';
         $teamRepository = new TeamRepository();
         $playerRepository = new PlayerRepository();
         $players = $playerRepository->getResults();
@@ -31,6 +28,11 @@ class TeamController {
             if (isset($_POST['teamName']) && !empty($_POST['teamName']) && 
                 isset($_POST['player1']) && !empty($_POST['player1']) && 
                 isset($_POST['player2']) && !empty($_POST['player2'])) {
+                if ($_POST['player1'] == $_POST['player2']){
+                    //echo "Veuillez choisir des pétanqueurs différents";
+                    header('Location: /index.php?c=Team&a=create&message=Veuillez choisir des pétanqueur différents');
+                    exit;
+                }
                 $team = new Team();
 
                 $team->setTeamName($_POST['teamName'])
@@ -38,7 +40,7 @@ class TeamController {
                     ->setplayer2Id($_POST['player2']);
                 $teamRepository->insert($team);
 
-                header('Location: /walkyries/index.php?c=Team');
+                header('Location: /index.php?c=Team');
                 exit;
             } else {
                 $errors[] = 'Missing Fiels';
@@ -54,37 +56,26 @@ class TeamController {
     }
     
     public function update(){
-
-        echo 'update';
-
         $teamRepository = new TeamRepository();
-
         $playerRepository = new PlayerRepository();
-
         $players = $playerRepository->getResults();
-
         $id = $_GET['id'];
-
         $errors = [];
-
         $team = $teamRepository->getResult('WHERE team_id=' . $id);
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
             if (isset($_POST['player1']) && !empty($_POST['player1']) && 
-
                 isset($_POST['player2']) && !empty($_POST['player2'])) {
-
+                if ($_POST['player1'] == $_POST['player2']){
+                    //echo "Veuillez choisir des pétanqueurs différents";
+                    header('Location: /index.php?c=Team&message=Veuillez choisir des pétanqueur différents');
+                    exit;
+                }
                 $team->setplayer1Id(htmlspecialchars($_POST['player1']))
-
                     ->setplayer2Id(htmlspecialchars($_POST['player2']));
-
                 $teamRepository->update($team);
-
-                header('Location: /walkyries/index.php?c=Team');
-
+                header('Location: /index.php?c=Team');
                 exit;
-
             } else {
 
                 $errors[] = 'Missing fields';
@@ -109,7 +100,7 @@ class TeamController {
 
         if (!isset($_GET['id']) || empty($_GET['id'])) {
 
-            header('Location: /walkyries/index.php?c=Team');
+            header('Location: /index.php?c=Team');
 
             exit;
 
@@ -121,7 +112,7 @@ class TeamController {
 
         $teamRepository->delete($team);
 
-        header('Location: /walkyries/index.php?c=Team');
+        header('Location: /index.php?c=Team');
 
         return;
 

@@ -16,23 +16,19 @@ $controllerName = 'App\\Controller\\';
 if(isset($_GET['c']) && !empty($_GET['c'])) {
     $controllerName .= ucfirst(strtolower($_GET['c'])) . 'Controller';
 } else {
-    $controllerName .= 'TournamentController';
+    $controllerName .= 'MatchController';
 }
-
 if (!class_exists($controllerName, true)){
     echo '404 - Probleme C';
     exit;
 }
-
 $controller = new $controllerName();
-
 if(isset($_GET['a']) && !empty($_GET['a'])){
     $action = $_GET['a'];
 } else {
     $action = 'index';
 }
 $methodesAvailable = get_class_methods($controller);
-
 if (!in_array($action, $methodesAvailable)) {
     echo '404';
     exit;

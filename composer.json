@@ -3,7 +3,8 @@
   "license": "proprietary",
   "require": {
     "php": "^7.2",
-    "ext-mysqli": "*"
+    "ext-mysqli": "*",
+    "components/jquery": "^3.3"
   },
   "require-dev": {
     "symfony/dotenv": "^4.2"

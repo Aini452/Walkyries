@@ -1,0 +1,8 @@
+ANDRE Amandine
+DELABRE Alexandre
+PUNU Hinerava
+
+Virtual Host : walkyries.local
+
+Le tournoi pioche les équipes de façon aléatoire. Mais commence avec 4 équipe et ne se réinitialise pas. Il faut effacer toutes les entrer de la table match pour reccommencer.
+Nous n'avons pas eu le temps / la capacité d'aller plus loin, désolées !

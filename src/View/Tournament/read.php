@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-    <html>
-        <head>
-            <title>Création du Tournoi</title>
-            <script src="http://code.jquery.com/jquery-1.9.0rc1.js"></script>
-        </head>
-    <body>
 
-        <?php require_once'menu.php'?>
+
+        <?php require_once 'menu.php'?>
             <div class="container">
                 <div class="row">
 
                     <div class='col-4'>
                         <strong>Quart de finale</strong>
-                        <?php foreach ($tournament as $match) : ?>
+                        <?php foreach ($tournamentQuart as $match) : ?>
                             <div id="<?php echo $match->getId(); ?>">
                                 <p><?php echo $match->getId(); ?></p>
                                 <ul class="list-group" style="width : 250px; margin : 50px;">      
@@ -32,24 +26,30 @@
 
                     <div class='col-4'>
                         <strong>Demie Finale</strong>
+                        <?php foreach ($tournamentDemiFinale as $match) : ?>
+                        <?php endforeach; ?>
                     </div>
 
                     <div class='col-4'>
                         <strong> Finale</strong>
+                        <?php foreach ($tournamentFinale as $match) : ?>
+                        <?php endforeach; ?>
                     </div>
+
                 </div>
+                
             <script>
              function loadDFinale(id){
                     console.log("On passe à la demie finale !");
                     var match = id;
                     console.log(match);
-                    var score1 = $('#'+id+' .score1').val(); 
+                    var score1 = $('#' + id +' .score1').val(); 
                     console.log(score1);
-                    var score2 = $('#'+id+' .score2').val(); 
+                    var score2 = $('#'+ id +' .score2').val(); 
                     console.log(score2);
 
                     $.ajax({
-                        url: 'index.php?c=Tournament&a=quart',
+                        url: 'index.php?c=Match&a=quart',
                         type: 'POST',
                         data: {
                             matchId : match,

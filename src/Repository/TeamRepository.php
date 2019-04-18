@@ -14,6 +14,7 @@ class TeamRepository extends Repository {
         parent::__construct(TeamRepository::$teamTable);
     }
 
+    // Conversion vers le modele Player
     private function converToModel(array $data): Team {
         $team = new Team();
         $team->setTeamId((int)$data['team_id'])
@@ -23,24 +24,28 @@ class TeamRepository extends Repository {
         return $team;
     }
 
+    // Obtenir tous les résultats de la base de données de la table selon la requete
+    // Retourne un tableau de teams
     public function getResults(string $request = ''): array {
         $result = parent::getResults($request);
         $teams = [];
         foreach($result as $result){
-            //var_dump($result);
             $teams[] = $this->converToModel($result);
         }
         return $teams;
     }
 
-    // Return a Player 
+    // Recupere un Player selon son id
+    // Retourne un player
     public function getPlayerFromId ($id) {
         $player = new PlayerRepository();
         $player = $player->getOnePlayer($id);
         return $player;
     }
 
-    public function getOneTeam(int $id): Team {
+    // Recupere une Team selon son id
+    // Retourne une team si elle existe
+    public function getOneTeam(int $id){
         $teamTab = $this->getResults();
         foreach ($teamTab as $res) {
             if ($res->getTeamId() === $id){
@@ -49,6 +54,7 @@ class TeamRepository extends Repository {
         }
         return false;
     }
+
     //find team
     public function getResult(string $request = ''): ?Team
     {
@@ -76,7 +82,6 @@ class TeamRepository extends Repository {
     }
 
     //update team
-
     public function update($team)
     {
         if (!$team instanceof Team) {

@@ -9,7 +9,7 @@ class Match {
     private $player1;
     /** @var int score1 */
     private $score1;
-
+    
     private $player2;
     /** @var int  score2 */
     private $score2;

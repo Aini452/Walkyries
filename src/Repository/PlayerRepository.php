@@ -29,7 +29,7 @@ class PlayerRepository extends Repository  {
         return $players;
     }
 
-    public function getOnePlayer(int $id): Player {
+    public function getOnePlayer(int $id) {
         $playersTab = $this->getResults();
         foreach ($playersTab as $res) {
             if ($res->getId() === $id){
@@ -39,7 +39,7 @@ class PlayerRepository extends Repository  {
         return false;
     }
 
-    public function getResult(string $request = ''): ?Player
+    public function getResult(string $request = '')
     {
         $player = null;
         $result = parent::getResult($request);

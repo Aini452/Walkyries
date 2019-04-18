@@ -8,18 +8,17 @@ use App\Model\Match;
 use App\Repository\TeamRepository;
 use App\Repository\PlayerRepository;
 
-class TournamentRepository extends Repository  {
+class MatchRepository extends Repository  {
 
     private static $matchTable = 'match';
 
     function __construct() {
-        parent::__construct(TournamentRepository::$matchTable);
+        parent::__construct(MatchRepository::$matchTable);
     }
 
     private function getTeamsStart() {
         $teamRepository = new TeamRepository();
         $teams =  $teamRepository->getResults();
-      
         $teamsTournament = [];
         for ($i=0 ; $i<8 ; $i++){
             $teamsTournament[] = $teams[$i];
@@ -29,10 +28,11 @@ class TournamentRepository extends Repository  {
     }
 
     public function startTournament(int $id = 1) {
-        $teams = self::getTeamsStart();
-        if (count($teams)>3){ 
-            echo 'Vous avez deja assez d\'équipes pour ce tournoi';
+        $matchs = $this->getResults();
+        if (count($matchs)>3){ 
+            //echo 'Vous avez deja assez d\'équipes pour ce tournoi';
         } else {
+            $teams = self::getTeamsStart();
             for ($i = 0 ; $i<4 ; $i++){
                 $match = new Match();
                 $player1Id = $teams[0]->getTeamId();
@@ -78,7 +78,6 @@ class TournamentRepository extends Repository  {
         $result = parent::getResults($request);
         $matchs = [];
         foreach($result as $result){
-            //var_dump($result);
             $matchs[] = $this->converToModel($result);
         }
         return $matchs;
@@ -97,13 +96,9 @@ class TournamentRepository extends Repository  {
     }
 
     public function updateScores($id, $score1, $score2){
-        //$match = this->getMatch($id);
         $request = 'SET score_1=' . $score1 . ', score_2=' . $score2 . ' WHERE match_id=' . $id . ';';
         var_dump($request);
         parent::update($request);
     }
 
-    public function compareScore($id){
-
-    }
 }

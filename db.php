@@ -10,19 +10,15 @@ if(!$env || $env === 'dev') {
     $dotenv = new DotEnv();
     $dotenv->load(__DIR__ . '/.env');
 }
-
 $db = new mysqli(getenv('DB_HOST'), 
                 getenv('DB_USER'),
                 getenv('DB_PASSWORD'),
                 getenv('DB_NAME'),
                 getenv('DB_PORT')
 );
-
 if($db->connect_errno){
     throw new Exception($db->connect_error);
 }
-
-
 
 $db->query('CREATE TABLE IF NOT EXISTS `player`(
     player_id INT PRIMARY KEY NOT NULL AUTO_INCREMENT, 
@@ -39,16 +35,14 @@ $db->query('CREATE TABLE IF NOT EXISTS `team`(
     player1_id INT,
     player2_id INT,
     FOREIGN KEY (player1_id) REFERENCES player(player_id),
-    FOREIGN KEY (player2_id) REFERENCES player(player_id));');
-    
+    FOREIGN KEY (player2_id) REFERENCES player(player_id));');   
 if ($db->errno){
     throw new Exception($db->error);
 }
 
 $db->query('CREATE TABLE IF NOT EXISTS `tournament`(
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
-    tournament_name VARCHAR(255));');
-    
+    tournament_name VARCHAR(255));');   
 if ($db->errno){
     throw new Exception($db->error);
 }
@@ -63,8 +57,7 @@ $db->query('CREATE TABLE IF NOT EXISTS `match`(
     tournament_id INT,
     FOREIGN KEY (team_1) REFERENCES team(team_id),
     FOREIGN KEY (team_2) REFERENCES team(team_id),
-    FOREIGN KEY (tournament_id) REFERENCES tournament(id));');
-    
+    FOREIGN KEY (tournament_id) REFERENCES tournament(id));');  
 if ($db->errno){
     throw new Exception($db->error);
 }

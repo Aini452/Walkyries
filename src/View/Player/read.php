@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html>
-   <head>
-      <title>Liste des joueurs</title>
-         <script src="public/js/bootstrap.min.js"></script>                  
-         <link  href="public/css/bootstrap.min.css" rel="stylesheet">
-   </head>
-   
-   <body>
+
       <?php require_once'menu.php'?>
          <div class="container-fluid">
             <div class="row">
